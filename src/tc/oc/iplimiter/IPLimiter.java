@@ -2,16 +2,15 @@ package tc.oc.iplimiter;
 
 import java.util.List;
 
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class IPLimiter extends JavaPlugin implements Listener {
 
@@ -27,16 +26,17 @@ public class IPLimiter extends JavaPlugin implements Listener {
         List<String> ips = this.getConfig().getStringList(event.getPlayer().getName());
         if(ips.size() > 0) {
             for(String ip : ips) {
-                System.out.println(ip);
                 if(event.getAddress().getHostAddress().equals(ip)) {
                     this.getLogger().info("Allowing " + event.getPlayer().getName() + " to login from " + event.getAddress().getHostAddress());
                     return;
                 }
             }
-            event.disallow(Result.KICK_WHITELIST, ChatColor.RED + " Your IP has not been approved");
+            this.getLogger().info("Denied " + event.getPlayer().getName() + " from logging in from " + event.getAddress().getHostAddress());
+            event.disallow(Result.KICK_WHITELIST, ChatColor.RED + "Your IP has not been approved - Contact the server owner if this is in error");
         }
     }
 
+    @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
         if(sender.hasPermission("iplimiter.reload")) {
             this.reloadConfig();
