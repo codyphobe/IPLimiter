@@ -1,0 +1,13 @@
+name: IPLimiter
+main: tc.oc.iplimiter.IPLimiter
+version: 0.1
+authors:
+- MonsieurApple
+commands:
+  iplimit:
+    usage: /<command>
+    description: Used to reload the configuration
+
+permissions:
+  iplimit.reload:
+    description: Allows the use of /iplimit
