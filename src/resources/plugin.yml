@@ -3,11 +3,22 @@ main: tc.oc.iplimiter.IPLimiter
 version: 0.1
 authors:
 - MonsieurApple
+- Anxuiz
 commands:
   iplimit:
-    usage: /<command>
-    description: Used to reload the configuration
+    aliases: ipl
+    usage: |
+      /<command> reload
+      /<command> info [player]
+      /<command> list
+      /<command> purge
+      /<command> <add|remove> <player> <ip>
+    description: Allow for reloading the config, looking up players, and adding / removing allowed ips in iplimit.
 
 permissions:
+  iplimit.info:
+    description: Allows the use of /iplimit info which shows the only IPs a player may join from.
+  iplimit.list:
+    description: Allows the use of /iplimit list which shows the players who have limited IPs.
   iplimit.reload:
-    description: Allows the use of /iplimit
+    description: Allows the use of /iplimit reload which reloads the list of player IPs.

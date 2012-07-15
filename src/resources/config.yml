@@ -1,7 +1,7 @@
-Notch:
+notch:
 - 127.0.0.1
 - 192.168.0.1
 
-AnotherPlayer:
+anotherplayer:
 - 255.255.255.0
 - 1.3.3.7
